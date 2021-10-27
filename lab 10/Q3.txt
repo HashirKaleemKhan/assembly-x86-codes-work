@@ -1,0 +1,42 @@
+INCLUDE Irvine32.inc
+
+
+
+.data
+
+str1 byte "Enter a value: ",0
+str2 byte "Square of value is: ",0
+
+.code
+
+LocalSquare PROC
+
+local var: dword 
+mov edx,offset str1
+call writestring
+call readint
+call crlf
+call crlf
+mov var,eax
+push var
+enter 0,0
+mov eax,[ebp+8]
+mov ebx,eax
+imul ebx
+mov edx,offset str2
+call writestring
+call writeint
+call crlf
+call crlf
+leave
+ret
+
+LocalSquare ENDP
+
+main PROC
+
+call Localsquare
+
+exit
+main ENDP
+END main

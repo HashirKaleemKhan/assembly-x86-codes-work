@@ -1,0 +1,57 @@
+INCLUDE Irvine32.inc
+
+
+
+.data
+
+str1 byte "Enter a value: ",0
+str2 byte "Factorial of value is: ",0
+str3 byte "Elapsed time is: ",0
+num dword ?
+temp dword ?
+count dword 0
+cc dword 0
+first dword ?
+second dword ?
+.code
+Fact PROC, num2 : dword, temp2 : dword, tt : dword
+L1:
+    dec num2
+	mov ebx,num2
+	imul ebx
+	inc count
+mov ebx,temp2
+cmp count,ebx
+je done
+Invoke Fact,num2,temp2,count
+done:
+ret
+Fact ENDP
+
+main PROC
+mov edx,offset str1
+call writestring
+call readint
+call crlf
+call crlf
+mov num,eax
+dec eax
+mov temp,eax
+call getmseconds
+mov first,eax
+mov eax,num
+Invoke Fact, num,temp,cc
+mov edx,offset str2
+call writestring
+call writeint
+call crlf
+call crlf
+call getmseconds
+sub eax,first
+mov edx,offset str3
+call writestring
+call writeint
+call crlf
+exit
+main ENDP
+END main

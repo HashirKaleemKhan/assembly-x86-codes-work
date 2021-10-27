@@ -1,0 +1,37 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+
+.data                                        
+
+one dword 0
+two dword 1
+fib dword ?
+
+.code
+main PROC
+
+mov eax,one
+call writedec
+call crlf
+mov eax,two 
+call writedec
+call crlf
+mov ecx,10
+L1:
+mov ebx,one
+add ebx,two
+mov fib,ebx
+mov eax,fib
+call writedec
+call crlf
+mov ebx,two
+mov one,ebx
+mov ebx,fib
+mov two,ebx	 
+loop L1
+
+exit
+main ENDP
+END main

@@ -1,0 +1,15 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+.code
+EXTENDEDADD PROC
+	add eax, ecx ; add low parts EAX += ECX, set CF
+    adc ebx, edx ; add high parts EBX += EDX, EBX += CF
+    ; The result is in EBX:EAX
+    ; NOTE: check CF or OF for overflow (*)
+	;see value in registers
+    call dumpregs
+exit
+EXTENDEDADD ENDP
+END EXTENDEDADD

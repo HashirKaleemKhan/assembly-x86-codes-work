@@ -1,0 +1,47 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+.data 
+    arr dword 8,5,7,6,3 
+    count dword 0 
+    Swap_Count byte 0
+    str1 BYTE "Name: Hashir Kaleem Khan    ID:16K-3818",0dh,0ah,0
+    str2 BYTE "Swap Count is: ",0
+    
+    .code 
+    main PROC  
+        mov edx,OFFSET str1
+	   call WriteString
+	   call crlf
+        mov ecx, lengthof arr 
+        dec ecx 
+        L1: 
+        mov count,ecx  
+        mov esi,offset arr 
+        L2: mov eax,[esi] 
+        cmp [esi+4],eax 
+        jg L3
+        xchg eax,[esi+4]  
+        mov [esi],eax
+        inc Swap_Count 
+        L3: add esi,4 
+        loop L2  
+        mov ecx,count 
+        loop L1 
+        mov esi,0 
+        mov ecx, lengthof arr 
+        L4: 
+        mov eax , arr[esi] 
+        add esi,4 
+        call writedec 
+        call crlf 
+        loop L4
+        mov eax,0
+        mov al,Swap_Count
+         mov edx,OFFSET str2
+	   call WriteString
+	   call crlf
+        call WriteDec 
+        main ENDP 
+        
+        end main

@@ -1,0 +1,39 @@
+INCLUDE Irvine32.inc
+
+
+
+.data
+
+str1 byte "Product of given values is: ",0
+
+.code
+ThreeProd PROC
+
+push ebp
+mov ebp,esp
+mov ebx,[ebp+16]
+mov eax,[ebp+12]
+imul ebx
+mov ebx,[ebp+8]
+imul ebx
+mov edx,offset str1
+call writestring
+call writeint
+call crlf
+pop ebp
+ret
+
+ThreeProd ENDP
+
+main PROC
+	
+mov eax,2
+push eax
+mov eax,4
+push eax
+mov eax,1
+push eax
+call ThreeProd
+exit
+main ENDP
+END main

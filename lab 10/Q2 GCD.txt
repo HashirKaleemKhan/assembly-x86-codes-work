@@ -1,0 +1,98 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+.code
+Display PROC, gcd : dword
+.data
+str12 byte "Value of ESP in Display is: ",0
+str3 byte "GCD of given numbers is: ",0
+.code
+mov eax,esp
+mov edx,offset str12
+call writestring
+call writehex
+call crlf
+call crlf
+mov edx,offset str3
+call writestring
+mov eax,gcd
+call writedec
+call crlf
+call crlf
+ret
+Display endp
+
+GCDCalc PROC, NUM1 : dword, NUM2 : dword
+.data
+  str11 byte "Value of ESP in GCDCalc is: ",0
+  GCD DW ?
+.code         
+mov eax,esp
+mov edx,offset str11
+call writestring
+call writehex
+call crlf
+call crlf
+		 MOV EAX,NUM1   ;Move the first number to AX.
+         MOV EBX,NUM2   ;Move the second number to BX.
+  UP: CMP EAX,EBX        ;Compare the two numbers.
+      JE EXITT          ;If equal, go to EXIT label.
+      JB EXCG          ;If first number is below than second,
+                       ;go to EXCG label.
+  UP1: MOV EDX,0H       ;Initialize the DX.
+       DIV EBX          ;Divide the first number by second number.
+       CMP EDX,0        ;Compare remainder is zero or not.
+       JE EXITT         ;If zero, jump to EXIT label.
+       MOV EAX,EDX       ;If non-zero, move remainder to AX.
+       JMP UP          ;Jump to UP label.
+  EXCG: XCHG EAX,EBX     ;Exchange the remainder and quotient.
+       JMP UP1        ;Jump to UP1.
+ EXITT: MOV GCD,BX     ;Store the result in GCD.
+	   Invoke Display,GCD
+       ret
+GCDCalc endp 
+
+TakeInput PROC
+.data
+  str10 byte "Value of ESP in TakeInput is: ",0
+  str1 byte "Enter first number: ",0
+  str2 byte "Enter second number: ",0
+  num1 DW ?
+  num2 DW ?
+.code
+mov eax,esp
+mov edx,offset str10
+call writestring
+call writehex
+call crlf
+call crlf
+mov edx,offset str1
+call writestring
+call readint
+call crlf
+call crlf
+mov num1,ax
+mov edx,offset str2
+call writestring
+call readint
+call crlf
+call crlf
+mov num2,ax
+Invoke GCDCalc, num1,num2
+ret
+TakeInput endp
+
+main PROC
+.data
+str0 byte "Value of ESP in main: ",0
+.code
+mov eax,esp
+mov edx,offset str0
+call writestring
+call writehex
+call crlf
+call crlf
+call TakeInput
+exit
+main endp
+end main

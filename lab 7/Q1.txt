@@ -1,0 +1,39 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+
+.data
+
+str1 BYTE "Name: Hashir Kaleem Khan    ID:16K-3818",0dh,0ah,0
+var byte 5
+x byte ?
+
+.code
+	main PROC
+	mov edx,OFFSET str1
+	call WriteString
+	call crlf
+	mov ecx,10
+	mov edx,7
+	mov eax,0
+	cmp var,cl
+	jb L1
+	mov x,1
+	mov al,x
+	call WriteDec
+	call crlf
+	L1:
+	   cmp cl,dl
+	   jge L2
+	   L2:
+	      mov x,0
+		  mov al,x
+		  call WriteDec
+		  call crlf
+	 
+
+
+exit
+main ENDP
+END main

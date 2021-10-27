@@ -1,0 +1,57 @@
+
+
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+
+.data
+
+str1 BYTE "Name: Hashir Kaleem Khan    ID:16K-3818",0dh,0ah,0
+str2 BYTE "Enter Elements: ",0
+str3 BYTE "Elements are not equal",0
+str4 BYTE "Elements are equal",0
+input byte 4 dup(?)
+var byte 0
+
+.code
+	main PROC
+	mov esi,0
+	mov eax,0
+	mov ebx,0
+	mov ecx,4
+	mov edx,OFFSET str1
+	call WriteString
+	call crlf
+	mov edx,OFFSET str2
+	call WriteString
+	call crlf
+    L1:
+	   call ReadInt
+	   mov input[esi*type input],al
+	   inc esi
+    loop L1
+	mov ecx,3
+	mov esi,0
+	mov eax,0
+	mov al,input[esi*type input]
+	L2:
+		inc esi
+	   cmp input[esi*type input],al
+	   je next
+	   mov edx,OFFSET str3
+	   call WriteString
+	   call crlf
+	   exit
+    next:
+	          inc var
+			  cmp var, 4
+			  je equal
+			  loop L2
+			  equal:
+		      mov edx,OFFSET str4
+	          call WriteString
+	          call crlf
+exit
+main ENDP
+END main

@@ -1,0 +1,16 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+.code
+EXTENDEDSBB PROC
+
+    mov edx, 1 ; upper half
+    mov eax, 0 ; lower half
+    sub eax, 1 ; subtract 1 from the lower half, set CF
+    sbb edx, 0 ; subtract carry CF from the upper half
+	;see value in registers
+    call dumpregs
+exit
+EXTENDEDSBB ENDP
+END EXTENDEDSBB

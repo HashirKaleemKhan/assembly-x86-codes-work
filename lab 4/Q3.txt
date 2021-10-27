@@ -1,0 +1,29 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+.data
+ 
+array1 BYTE 10, 20, 30, 40
+array2 BYTE 4 DUP(?)
+i dword 4
+j dword 1
+
+.code
+main PROC
+
+mov ecx,4
+mov esi,4
+L1:
+mov esi,i
+mov al,array1[esi*type array1]
+dec esi
+mov i,esi
+mov esi,j
+mov array2[esi*type array2],al
+inc j
+loop L1
+
+exit
+
+main ENDP
+END main

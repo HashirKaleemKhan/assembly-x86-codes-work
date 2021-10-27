@@ -1,0 +1,19 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+.data
+ 
+arr 	DWORD 	1000, 2000, 4000, 6000
+ptr1  DWORD offset arr
+ptr2  DWORD offset arr+1
+ptr3  DWORD offset arr+2
+ptr4  DWORD offset arr+3
+
+.code
+main PROC
+
+
+exit
+
+main ENDP
+END main

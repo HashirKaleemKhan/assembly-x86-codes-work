@@ -1,0 +1,43 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+.data
+
+
+str1 byte "After encryption eax: ",0
+str2 byte "After decryption eax: ",0
+str3 byte "Original value of eax: ",0
+
+.code
+main PROC
+
+mov eax,5
+mov edx,offset str3
+call writestring
+call writedec
+call crlf
+
+mov ecx,6
+L1:
+	shl eax,1
+	rol eax,1
+loop L1
+mov edx,offset str1
+call writestring
+call writedec
+call crlf
+
+mov ecx,6
+L2:
+	shr eax,1
+	ror eax,1
+loop L2
+mov edx,offset str2
+call writestring
+call writedec
+call crlf
+
+exit
+main ENDP
+END main

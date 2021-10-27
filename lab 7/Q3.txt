@@ -1,0 +1,35 @@
+
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+
+.data
+
+str1 BYTE "Name: Hashir Kaleem Khan    ID:16K-3818",0dh,0ah,0
+str2 BYTE "First non zero element is: ",0
+intarr SWORD 0,0,0,0,1,20,35,-12,66,4,0
+
+.code
+	main PROC
+	mov esi,0
+	mov eax,0
+	mov edx,OFFSET str1
+	call WriteString
+	call crlf
+    L1:
+    cmp intarr[esi*type intarr],1
+	jge next
+	inc esi
+	loop L1
+	next:
+	   movzx eax,intarr[esi*type intarr]
+	   mov edx,OFFSET str2
+	   call WriteString
+	   call crlf
+	   call writedec
+	   call crlf
+
+exit
+main ENDP
+END main

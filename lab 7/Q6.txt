@@ -1,0 +1,50 @@
+
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+
+.data
+
+str1 BYTE "Name: Hashir Kaleem Khan    ID:16K-3818",0dh,0ah,0
+str2 BYTE "Enter Element to search: ",0
+str3 BYTE "Element Found in array",0
+str4 BYTE "Element not Found in array",0
+arr word 10,4,7,14,299,156,3,19,29,300,20
+var word ?
+check byte 0 
+.code
+	main PROC
+	mov esi,0
+	mov eax,0
+	mov ecx,11
+	mov edx,OFFSET str1
+	call WriteString
+	call crlf
+	mov edx,OFFSET str2
+	call WriteString
+	call crlf
+	call ReadInt
+	mov var,ax
+	L1:
+		mov dx,arr[esi*type arr]
+	   cmp var,dx
+	   jne next
+			mov check,1
+			jmp exit1
+		next:
+			mov check,0
+	   inc esi
+    loop L1
+exit1:	   
+cmp check,1
+JE print
+	mov edx,offset str4
+	Call WriteString   
+	exit
+print:
+	mov edx,offset str3
+	Call WriteString     	       
+exit
+main ENDP
+END main

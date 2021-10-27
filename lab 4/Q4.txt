@@ -1,0 +1,49 @@
+INCLUDE Irvine32.inc
+.data
+	ARRAY1  SDWORD -17, 0FE001Ch, 'COAL',0
+			DWORD   19FC01h, 170090h
+			SWORD   1509h, 0F1F1h
+
+.code
+main PROC
+	MOV EAX,0
+	MOV EBX,0
+	MOV ESI,0
+	MOV EBX,ARRAY1[ESI+5]
+	MOV AX,BX
+	call WriteHex
+	call CRLF
+
+	MOV EBX,0
+	MOV EAX,0
+	MOV AL,BYTE PTR ARRAY1[ESI+25]
+	call DumpRegs 
+	call CRLF
+
+	MOV EBX,0
+	MOV EAX,0
+	MOV EAX,ARRAY1[ESI+11]
+	call Writechar
+	call CRLF
+
+	MOV EBX,0
+	MOV EAX,0
+	MOV EAX,ARRAY1[ESI+10]
+	call Writechar
+	call CRLF
+
+	MOV EAX,0
+	MOV EAX,ARRAY1[ESI+9]
+	call Writechar
+	call CRLF
+
+	MOV EAX,0
+	MOV EAX,ARRAY1[ESI+8]
+	call Writechar
+	call CRLF
+	
+
+exit
+main ENDP
+END main
+	

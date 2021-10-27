@@ -1,0 +1,45 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+.data
+x dword 10
+y dword 20
+gcd dword ?
+count dword -1
+
+.code
+main PROC
+again:
+mov ecx,1
+L1:
+   mov edx,0
+   mov eax,x
+   cdq
+   idiv y
+   mov gcd,edx
+   mov ebx,y
+   mov x,ebx
+   mov edx,gcd
+   mov y,edx
+   ;while(y>0)
+       cmp y,0
+	   je L2
+	   mov ecx,1
+	   loop L1
+    L2:
+	mov eax,gcd
+;result
+call writedec
+call crlf
+
+;second time
+mov x,5
+mov y,10
+inc count
+cmp count,1
+je exittt
+jmp again
+exittt:
+exit
+main ENDP
+END main

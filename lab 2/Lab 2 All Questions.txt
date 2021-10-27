@@ -1,0 +1,11 @@
+1- a sword ?
+2- b byte ?
+3- c sbyte ?
+4- d qword ?
+5- DWORD
+6- a sdword -2147483648
+7- wArray dword 1,2,3
+8- str1 byte "black",0
+9- dArray dword 50 dup(?)
+10- str2 byte "TEST" dup(500)
+11- bArray byte 20 dup(0)

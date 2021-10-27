@@ -1,0 +1,113 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+.data
+arr word 4 dup(?)
+str1 BYTE "Enter number: ",0
+str2 BYTE "Result is: ",0
+str3 BYTE "1 indicates prime number and 0 not prime",0
+str4 BYTE "Largest prime no is: ",0
+temp word 0
+res word ?
+val word 0
+val2 word 4
+
+.code
+
+LargestPrime PROC, arr2:  ptr word
+
+.data
+max word 0
+
+.code
+mov esi,1
+mov ecx,4
+calcmax:
+        mov eax,arr2[esi*type arr2]
+		cmp ax,max
+		jg assign
+		inc esi
+		loop calcmax
+		jmp enddd
+		assign:
+		       mov eax,arr2[esi*type arr2]
+		       mov max,ax
+               inc esi
+			   loop calcmax
+        enddd:
+			   mov edx,offset str4
+			   call writestring
+			   movzx eax,max
+			   call writedec
+			   call crlf
+			   call crlf
+		       ret
+LargestPrime ENDP
+
+CheckPrime Proc	
+        mov esi,1
+        mov ecx,4
+     input:
+        mov edx,offset str1
+        call writestring
+        call crlf
+        call crlf
+        call readint
+        mov arr[esi*type arr],ax
+        inc esi
+        loop input
+		mov esi,0
+		again:
+		inc esi
+		MOV BX,0002	 
+		MOV ax,arr[esi*type arr]	
+ 		MOV DX,0001 	
+ 		CMP AX,0002 	;COMPARE AX WITH 2
+ 		JZ L2 	        ;JUMP TO L2 IF ZERO
+ L1: 	MOV DX,0000 	;INITIALIZE DX WITH ZERO
+ 		DIV BX 	        ;DIVIDE AX WITH BX
+ 		CMP DX,0000 	;COMPARE DX WITH 0000
+ 		JZ L3 	        ;JUMP TO L3 IF ZERO
+ 		MOV AX,arr[esi*type arr] 
+ 		INC BX 	
+ 		CMP AX,BX 	    ;COMPARE AX WITH BX
+ 		JNZ L1 	        ;JUMP TO L1 IF NOT ZERO
+ L2: 	MOV res,0001 
+ L3:	MOV res,DX
+        mov edx,offset str2
+		call writestring
+        movzx eax,res
+		call writedec
+		call crlf
+		call crlf
+		cmp eax,1       ;other is to count results in temp to move on to largestfunction
+		je other
+		inc val         
+		cmp val,4       ;end proc if all 4 no are checked
+		je endd
+		jmp again
+		jmp endd       ;else check for next no
+		other:          
+		inc temp
+		inc val         
+		cmp val,4       ;end proc if all 4 no are checked
+		je endd
+		jmp again       ;else check for next no
+		endd:	
+		     cmp temp,4
+			 je nextfunc
+		ret
+		nextfunc:
+		         Invoke LargestPrime, offset arr    ;To check largest prime
+				 ret
+CheckPrime ENDP
+
+main PROC
+mov edx,offset str3
+call writestring
+call crlf
+call crlf
+call CheckPrime
+exit
+main endp
+end main 

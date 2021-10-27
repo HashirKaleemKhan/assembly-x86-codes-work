@@ -1,0 +1,39 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+.data
+
+x dword 1
+y dword 3
+z dword 7
+
+.code
+Duplicate PROC,  a: ptr dword, b: ptr dword, c: ptr dword
+
+mov [a],2
+mov [b],2
+mov [c],2
+
+ret
+Duplicate ENDP
+
+main PROC
+
+Invoke Duplicate, offset x, offset y, offset z
+
+mov eax,x
+call writedec
+call crlf
+
+mov eax,y
+call writedec
+call crlf
+
+mov eax,z
+call writedec
+call crlf
+
+exit
+main ENDP
+END main

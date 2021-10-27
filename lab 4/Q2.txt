@@ -1,0 +1,25 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+.data
+
+array byte 1,2,3,4,5
+
+.code
+main PROC
+
+mov ecx,5
+mov esi,0
+mov eax,0  ; sum of array will be in eax
+L1:
+	add al,array[esi]
+	inc esi
+loop L1
+
+call writedec
+call crlf
+
+exit
+main ENDP
+END main

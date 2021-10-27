@@ -1,0 +1,41 @@
+TITLE My First Program (Test.asm)
+INCLUDE Irvine32.inc
+
+
+
+.data                                       
+
+myarr byte 15,10,25,20,30
+i byte 0
+j byte 0
+
+.code
+main PROC
+mov esi,0
+mov ecx,5
+L1:
+mov al,myarr[esi*type myarr]
+inc esi
+cmp al,myarr[esi*type myarr]
+jg swap
+loop L1
+swap:
+mov bl,myarr[esi*type myarr]
+dec esi
+xchg bl,myarr[esi*type myarr]
+inc esi
+loop L1
+
+;printing
+mov ecx,5
+mov esi,0
+L2:
+mov al,myarr[esi*type myarr]
+call writedec
+call crlf
+inc esi
+loop L2
+
+exit
+main ENDP
+END main
